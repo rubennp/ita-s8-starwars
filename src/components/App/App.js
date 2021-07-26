@@ -28,10 +28,10 @@ const App = () => {
             </Container>
           </Navbar>
         </Row>
-        <Row>
-          <Navbar bg="dark" variant="dark">
+        <Row className="main-nav">
+          <Navbar bg="dark" variant="dark" className="nav-principal">
             <Container>
-              <Nav className="me-auto" as="ul">
+              <Nav as="ul">
                 <Nav.Item as="li"><NavLink exact to ="/" className="nav-link">Home</NavLink></Nav.Item>
                 <Nav.Item as="li"><NavLink to="/starships" className="nav-link">StarShips</NavLink></Nav.Item>
               </Nav>
