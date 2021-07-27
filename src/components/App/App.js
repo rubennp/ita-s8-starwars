@@ -60,7 +60,7 @@ const App = () => {
             <Route path="/starships/:idx">
               {/* al ser objeto async, espera a que exista antes de pasarlo por props:
                 https://stackoverflow.com/questions/57169964/error-in-render-typeerror-cannot-read-property-name-of-undefined-vue-warn */}
-              {starships && <StarShipInfo starships={starships}/> }
+              <StarShipInfo starships={starships}/>
             </Route>
             <Route path="/starships">
               <StarShips starships={starships}/>

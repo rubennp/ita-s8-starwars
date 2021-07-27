@@ -6,11 +6,12 @@ import stars from '../../../../assets/stars.jpeg';
 const Info = ({starships}) => {
     const { idx } = useParams();
     const starship = {...starships[idx]};
-    // const swapiRef = starship.url.replaceAll(/[^\d]/g, '');
-    // console.log(swapiRef);
+    const swapiRef = starship.url.replaceAll(/[^\d]/g, '');
+    console.log(swapiRef);
 
     return (
         <Fitxa>
+            <img src={`https://starwars-visualguide.com/assets/img/starships/${swapiRef}.jpg`} alt="deathstar" />
             <dt>
                 <h2>{starship.name}</h2>
                 <h3>{starship.model}</h3>
