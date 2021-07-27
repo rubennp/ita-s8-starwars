@@ -15,7 +15,7 @@ import StarShipInfo from '../Pages/StarShips/Info';
 import StarWarsLogo from '../../assets/logo.svg';
 
 const App = () => {
-  const [starships, setStarships] = useState([]);
+  const [starships, setStarships] = useState(null);
 
   useEffect(() => {
     const getData = async () => { 
