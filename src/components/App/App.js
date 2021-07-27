@@ -1,10 +1,10 @@
 import { Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Route, Switch, NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Styled Components
 import { AppContainer, Logo } from './App.styled';
-import { useState, useEffect } from 'react';
 
 // Pages
 import Home from '../Pages/Home';

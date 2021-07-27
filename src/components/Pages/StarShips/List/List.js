@@ -7,7 +7,6 @@ const List = ({starships}) => {
     return (
         <Ul>
             {starships.map((starship, idx) => 
-             // <a href={`/starships/${starship.url.replaceAll(/[^\d]/g, '')}`} key={idx}>
                 <a href={`/starships/${idx}`} key={idx}>
                     <Item starship={starship}></Item>
                 </a> 
