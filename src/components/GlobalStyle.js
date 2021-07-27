@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
         text-transform: uppercase;
     }
 
-    .main-nav {
+    .headerMainNav {
         border-top: 1px solid rgba(255, 255, 255, .5);
         border-bottom: 1px solid rgba(255, 255, 255, .5);
 
