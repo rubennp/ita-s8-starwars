@@ -15,6 +15,8 @@ const Li = styled.li`
     background-color: #212529;
     color: rgba(255, 255, 255, .5);
 
+    &:hover { cursor: pointer };
+
     h2 { 
         text-transform: uppercase; 
         font-size: 2em;

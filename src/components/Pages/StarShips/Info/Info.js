@@ -4,11 +4,9 @@ import { useParams } from 'react-router-dom';
 
 import imgError from '../../../../assets/found-image-not-was.jpg';
 
-
 const Info = ({starships}) => {
     const { idx } = useParams();
     const starship = {...starships[idx]};
-    const swapiRef = starship.url.replaceAll(/[^\d]/g, '');
 
     return (
         <Fitxa>
@@ -65,7 +63,7 @@ const Info = ({starships}) => {
                 </Details>
                 <Image>
                     <img 
-                        src={`https://starwars-visualguide.com/assets/img/starships/${swapiRef}.jpg`}
+                        src={`https://starwars-visualguide.com/assets/img/starships/${starship.swapiRef}.jpg`}
                         onError={e => { 
                             e.target.src = `${imgError}`
                             e.target.width = "600"

@@ -25,7 +25,6 @@ export const DetailsGrid = styled.div`
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-image: url(${stars});
     background-size: cover;
-    opacity: .5;
 `;
 
 export const Details = styled.div`
@@ -38,11 +37,14 @@ export const Detail = styled.div`
     color: white;
 
     & > dt { text-transform: uppercase; }
+
+    & > dd { text-align: right; }
 `;
 
 export const Image = styled.div`
     display: flex;
     justify-content: center;
+    filter: drop-shadow(1px 1px 5px red)
 `;
 
 export const Fitxa = styled.dl`

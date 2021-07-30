@@ -1,7 +1,9 @@
-import { Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Container, Nav, Navbar, Row, Spinner } from 'react-bootstrap';
 import { Route, Switch, NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect  } from 'react';
+
+// hooks
+import { useGetSwapiData } from '../../hooks/useGetSwapiData';
 
 // Styled Components
 import { AppContainer, Logo } from './App.styled';
@@ -15,19 +17,16 @@ import StarShipInfo from '../Pages/StarShips/Info';
 import StarWarsLogo from '../../assets/logo.svg';
 
 const App = () => {
+  let starshipsData = useGetSwapiData('starships');
   const [starships, setStarships] = useState(null);
 
   useEffect(() => {
-    const getData = async () => { 
-        const results = await axios('https://swapi.dev/api/starships');
-        setStarships(results.data.results);
-    };
-    getData();
-  }, []);
+    setStarships(starshipsData.results.starships);
+  }, [starshipsData]);
 
   return (
     <AppContainer className="appContainer">
-      <Container fluid className="headerContainer">
+      <Container fluid className="headerContainer sticky-top">
         <Row className="headerUpperRow">
           <Navbar bg="dark" variant="dark">
             <Container className="logoContainer">
@@ -58,12 +57,20 @@ const App = () => {
         <Row>
           <Switch>
             <Route path="/starships/:idx">
-              {/* al ser objeto async, espera a que exista antes de pasarlo por props:
-                https://stackoverflow.com/questions/57169964/error-in-render-typeerror-cannot-read-property-name-of-undefined-vue-warn */}
-              {starships && <StarShipInfo starships={starships}/> }
+              {starshipsData.isLoading &&
+                  <div>
+                    <Spinner animation="border" variant="light" />
+                    <h1>Loading info...</h1>
+                  </div>}
+              {starships && <StarShipInfo starships={starships} />}
             </Route>
             <Route path="/starships">
-              <StarShips starships={starships}/>
+              {starships && <StarShips starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}}/>} 
+              {starshipsData.isLoading && 
+                <div>
+                  <Spinner animation="border" variant="light"></Spinner>
+                  <h1>Loading list...</h1>
+                </div>}
             </Route>
             <Route path="/signin"><SignIn /></Route>
             <Route path="/signup"><SignUp /></Route>

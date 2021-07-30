@@ -27,7 +27,10 @@ export const GlobalStyle = createGlobalStyle`
 
             &:first-of-type { border-left: 1px solid rgba(255, 255, 255, .5); }
 
-            & a.active { border-bottom: 5px solid #0066ff; }
+            & a.active { 
+                text-shadow: 1px 1px 5px white;
+                border-bottom: 5px solid #0066ff; 
+            }
         }
     }
 `;  
