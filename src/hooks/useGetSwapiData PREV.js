@@ -9,6 +9,7 @@ export const useGetSwapiData = (from) => {
     const [pageNumber, setPageNumber] = useState(1);
 
     useEffect(() => {
+        // REVISAR !! (crec haver-lo deixat com estava, però...)
         const getData = async ()=> {
             setIsLoading(true);
             setError(false);
