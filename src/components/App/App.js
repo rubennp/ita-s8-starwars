@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, Row, Spinner } from 'react-bootstrap';
 import { Route, Switch, NavLink } from 'react-router-dom';
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 
 // hooks
 import { useGetSwapiData } from '../../hooks/useGetSwapiData';
@@ -17,12 +17,12 @@ import StarShipInfo from '../Pages/StarShips/Info';
 import StarWarsLogo from '../../assets/logo.svg';
 
 const App = () => {
-  let starshipsData = useGetSwapiData('starships');
+  const starshipsData = useGetSwapiData('starships');
   const [starships, setStarships] = useState(null);
 
   useEffect(() => {
-    setStarships(starshipsData.results.starships);
-  }, [starshipsData]);
+    setStarships(starshipsData.state.results);
+  }, [starshipsData.state.results]);
 
   return (
     <AppContainer className="appContainer">
@@ -58,20 +58,32 @@ const App = () => {
           <Switch>
             <Route path="/starships/:idx">
               {starshipsData.isLoading &&
-                  <div>
-                    <Spinner animation="border" variant="light" />
-                    <h1>Loading info...</h1>
-                  </div>}
+                  <Container>
+                    <Row className="spinner">
+                      <Spinner animation="grow" variant="light">
+                        <span className="visually-hidden">Loading...</span>
+                      </Spinner>
+                    </Row>
+                  </Container>}
               {starships && <StarShipInfo starships={starships} />}
             </Route>
-            <Route path="/starships">
-              {starships && <StarShips starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}}/>} 
-              {starshipsData.isLoading && 
-                <div>
-                  <Spinner animation="border" variant="light"></Spinner>
-                  <h1>Loading list...</h1>
-                </div>}
-            </Route>
+            <Route path="/starships" render={props => {
+                if (starships) {
+                  if (starshipsData.isLoading) {
+                    return (
+                      <>
+                        <StarShips {...props} starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} />
+                        <Spinner animation="border" variant="light">
+                          <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                      </>
+                    );
+                  } else {
+                    return <StarShips {...props} starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} />;
+                  }
+                }
+              }
+            }/>
             <Route path="/signin"><SignIn /></Route>
             <Route path="/signup"><SignUp /></Route>
             <Route exact path="/"><Home /></Route>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // components
 import Item from './Item';
 
-const StarShips = ({starships, data: {isLoading, hasMore, setPage} }) => {
+const StarShips = ({history, starships, data: {isLoading, hasMore, setPage} }) => {
     const observer = useRef();
     const lastEl = useCallback(node => {
         if (isLoading) return;
@@ -25,13 +25,13 @@ const StarShips = ({starships, data: {isLoading, hasMore, setPage} }) => {
                 const isLastEl = starships.length === idx + 1;
 
                 return isLastEl ? (
-                    <a href={`/starships/${idx}`} key={idx} ref={lastEl}>
+                    <button type="button" key={idx} ref={lastEl} onClick={() => { history.push(`/starships/${idx}`) }}>
                         <Item starship={starship}></Item>
-                    </a>
+                    </button>
                 ) : (
-                    <a href={`/starships/${idx}`} key={idx}>
+                    <button type="button" href={`/starships/${idx}`} key={idx} onClick={() => { history.push(`/starships/${idx}`) }}>
                         <Item starship={starship}></Item>
-                    </a>
+                    </button>
                 )
             }
             )}
@@ -40,9 +40,12 @@ const StarShips = ({starships, data: {isLoading, hasMore, setPage} }) => {
 };
 
 const Ul = styled.ul`
-    a { 
-        text-decoration: none;
-
+    button {
+        display: list-item;
+        width: 100%;
+        border: none;
+        padding: 0;
+        margin: 20px 10px;
         &:hover li { color: white; }
     }
 

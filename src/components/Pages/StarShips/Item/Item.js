@@ -11,7 +11,6 @@ const Item = ({starship})  => {
 
 const Li = styled.li`
     padding: 10px;
-    margin: 20px 10px;
     background-color: #212529;
     color: rgba(255, 255, 255, .5);
 

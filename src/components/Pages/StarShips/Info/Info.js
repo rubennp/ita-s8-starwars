@@ -1,13 +1,18 @@
-import { Fitxa, Header, DetailsGrid, Details, Detail, Image } from './Info.styled.js';
-
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { Fitxa, Header, DetailsGrid, Details, Detail, Image } from './Info.styled.js';
 
 import imgError from '../../../../assets/found-image-not-was.jpg';
 
 const Info = ({starships}) => {
     const { idx } = useParams();
-    const starship = {...starships[idx]};
-
+    const [starship, setStarship] = useState({...starships[idx]});
+    
+    useEffect(() => {
+        setStarship({...starships[idx]});
+    }, [starships, idx]);
+    
     return (
         <Fitxa>
             <Header>

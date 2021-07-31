@@ -17,7 +17,6 @@ export const AppContainer = styled.div`
     .loginContainer { justify-content: flex-end; }
 
     .menuContainer { justify-content: center; }
-
 `;
 
 export const Logo = styled.img`
