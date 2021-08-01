@@ -41,7 +41,7 @@ const Info = ({history, starships, total}) => {
                         history.push(`/starships/${idx < starships.length - 1 ? parseInt(idx) + 1 : 0 }`)
                     }} >→</button>
                     </div>
-                    <p>{`viewing ${starships.length} of ${total}`}</p>
+                    <p>{`loaded ${starships.length} of ${total}`}</p>
 
                 </div>
             </Header>
