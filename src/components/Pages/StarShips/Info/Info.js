@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Fitxa, Header, DetailsGrid, Details, Detail, Image } from './Info.styled.js';
+import { Fitxa, Header, DetailsGrid, Details, Detail, Image, Navigation } from './Info.styled.js';
 
 import imgError from '../../../../assets/found-image-not-was.jpg';
 
@@ -18,8 +18,6 @@ const Info = ({history, starships, total}) => {
         setStarship({...starships[idx]}); 
     }, [starships, idx]);
     
-    console.log(history);
-    
     return (
         <Fitxa>
             <Header>
@@ -27,23 +25,33 @@ const Info = ({history, starships, total}) => {
                     <h2>{starship.name}</h2>
                     <h3>{starship.model}</h3>
                 </div>
-                <div>
+                <Navigation>
                     <div>
-                    <button type="button" onClick={() => {
-                        setBacks(prev => prev + 1);
-                        console.log(backs);
-                        history.push(`/starships/${idx > 0 ? parseInt(idx) - 1 : starships.length - 1}`)
-                    }} >←</button>
-                    <button type="button" onClick={() => history.go(-(backs))} >◉</button>
-                    <button type="button" onClick={() => {
-                        setBacks(prev => prev + 1);
-                        console.log(backs);
-                        history.push(`/starships/${idx < starships.length - 1 ? parseInt(idx) + 1 : 0 }`)
-                    }} >→</button>
+                        <button type="button" onClick={() => {
+                            setBacks(prev => prev + 1);
+                            console.log(backs);
+                            history.push(`/starships/0`)
+                        }} >⇤</button>
+                        <button type="button" onClick={() => {
+                            setBacks(prev => prev + 1);
+                            console.log(backs);
+                            history.push(`/starships/${idx > 0 ? parseInt(idx) - 1 : starships.length - 1}`)
+                        }} >←</button>
+                        <button className="return" type="button" onClick={() => history.go(-(backs))} >△</button>
+                        <button type="button" onClick={() => {
+                            setBacks(prev => prev + 1);
+                            console.log(backs);
+                            history.push(`/starships/${idx < starships.length - 1 ? parseInt(idx) + 1 : 0 }`)
+                        }} >→</button>
+                        <button type="button" onClick={() => {
+                            setBacks(prev => prev + 1);
+                            console.log(backs);
+                            history.push(`/starships/${starships.length - 1}`)
+                        }} >⇥</button>
                     </div>
                     <p>{`loaded ${starships.length} of ${total}`}</p>
 
-                </div>
+                </Navigation>
             </Header>
             <DetailsGrid>
                 <Details>

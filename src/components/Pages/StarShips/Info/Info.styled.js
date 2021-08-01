@@ -16,16 +16,18 @@ export const Header = styled.dt`
         font-size: 1.5em; 
         font-style: oblique;
     }
+`;
 
+export const Navigation = styled.div`
     button {
         margin-top: 1em;
         border: unset;
         background-color: rgba(0, 0, 0, 0);
         color: rgba(255, 255, 255, 0.5);
-        font-size: 1.25em;
 
         &:hover {
             color: white;
+            transform: scale(1.25);
         }
     }
 
