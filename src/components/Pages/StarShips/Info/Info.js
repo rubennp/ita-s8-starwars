@@ -5,7 +5,7 @@ import { Fitxa, Header, DetailsGrid, Details, Detail, Image } from './Info.style
 
 import imgError from '../../../../assets/found-image-not-was.jpg';
 
-const Info = ({history, starships}) => {
+const Info = ({history, starships, total}) => {
     const { idx } = useParams();
     const [starship, setStarship] = useState({...starships[idx]});
     const [backs, setBacks] = useState(1);
@@ -28,6 +28,7 @@ const Info = ({history, starships}) => {
                     <h3>{starship.model}</h3>
                 </div>
                 <div>
+                    <div>
                     <button type="button" onClick={() => {
                         setBacks(prev => prev + 1);
                         console.log(backs);
@@ -39,6 +40,9 @@ const Info = ({history, starships}) => {
                         console.log(backs);
                         history.push(`/starships/${idx < starships.length - 1 ? parseInt(idx) + 1 : 0 }`)
                     }} >→</button>
+                    </div>
+                    <p>{`viewing ${starships.length} of ${total}`}</p>
+
                 </div>
             </Header>
             <DetailsGrid>

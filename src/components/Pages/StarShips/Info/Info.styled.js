@@ -18,6 +18,7 @@ export const Header = styled.dt`
     }
 
     button {
+        margin-top: 1em;
         border: unset;
         background-color: rgba(0, 0, 0, 0);
         color: rgba(255, 255, 255, 0.5);
@@ -26,6 +27,14 @@ export const Header = styled.dt`
         &:hover {
             color: white;
         }
+    }
+
+    p { 
+        color: rgba(255, 255, 255, 0.25);
+        font-style: oblique;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: .6em;
     }
 `;
 

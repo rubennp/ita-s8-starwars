@@ -64,7 +64,7 @@ const App = () => {
                     <Spinner animation="grow" variant="light">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner> }
-                  { starships && <StarShipInfo {...props } starships={starships} /> }
+                  { starships && <StarShipInfo {...props } starships={starships} total={starshipsData.state.count} /> }
                 </>
               );
             }}>
