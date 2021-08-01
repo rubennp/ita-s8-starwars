@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 // hooks
 import { useGetSwapiData } from '../../hooks/useGetSwapiData';
 
+
 // Styled Components
 import { AppContainer, Logo } from './App.styled';
 
@@ -56,34 +57,28 @@ const App = () => {
       <Container>
         <Row>
           <Switch>
-            <Route path="/starships/:idx">
-              {starshipsData.isLoading &&
-                  <Container>
-                    <Row className="spinner">
-                      <Spinner animation="grow" variant="light">
-                        <span className="visually-hidden">Loading...</span>
-                      </Spinner>
-                    </Row>
-                  </Container>}
-              {starships && <StarShipInfo starships={starships} />}
+            <Route path="/starships/:idx" render={props => {
+              return (
+                <>
+                  { starshipsData.isLoading && 
+                    <Spinner animation="grow" variant="light">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner> }
+                  { starships && <StarShipInfo {...props } starships={starships} /> }
+                </>
+              );
+            }}>
             </Route>
             <Route path="/starships" render={props => {
-                if (starships) {
-                  if (starshipsData.isLoading) {
-                    return (
-                      <>
-                        <StarShips {...props} starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} />
-                        <Spinner animation="border" variant="light">
-                          <span className="visually-hidden">Loading...</span>
-                        </Spinner>
-                      </>
-                    );
-                  } else {
-                    return <StarShips {...props} starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} />;
-                  }
-                }
-              }
-            }/>
+              return (
+                <>
+                  { starships && <StarShips {...props} starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} /> }
+                  { starshipsData.isLoading && <Spinner animation="border" variant="light"> 
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner> }
+                </>
+              );
+            }}/>
             <Route path="/signin"><SignIn /></Route>
             <Route path="/signup"><SignUp /></Route>
             <Route exact path="/"><Home /></Route>

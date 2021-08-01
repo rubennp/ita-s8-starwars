@@ -24,15 +24,13 @@ const StarShips = ({history, starships, data: {isLoading, hasMore, setPage} }) =
             {starships.map((starship, idx) => {
                 const isLastEl = starships.length === idx + 1;
 
-                return isLastEl ? (
-                    <button type="button" key={idx} ref={lastEl} onClick={() => { history.push(`/starships/${idx}`) }}>
+                return (
+                    <button type="button" key={idx} ref={isLastEl ? lastEl : null } onClick={() => { 
+                        history.push(`/starships/${idx}`);
+                    }}>
                         <Item starship={starship}></Item>
                     </button>
-                ) : (
-                    <button type="button" href={`/starships/${idx}`} key={idx} onClick={() => { history.push(`/starships/${idx}`) }}>
-                        <Item starship={starship}></Item>
-                    </button>
-                )
+                ); 
             }
             )}
         </Ul>

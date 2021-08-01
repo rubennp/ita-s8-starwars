@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import stars from '../../../../assets/stars.jpeg';
 
 export const Header = styled.dt`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 1em; 
     background-color: #212529;
     color: rgba(255, 255, 255, 0.75);
@@ -12,6 +15,17 @@ export const Header = styled.dt`
     h3 { 
         font-size: 1.5em; 
         font-style: oblique;
+    }
+
+    button {
+        border: unset;
+        background-color: rgba(0, 0, 0, 0);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.25em;
+
+        &:hover {
+            color: white;
+        }
     }
 `;
 
