@@ -64,7 +64,7 @@ const App = () => {
                     <Spinner animation="grow" variant="light">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner> }
-                  { starships && <StarShipInfo {...props } starships={starships} total={starshipsData.state.count} /> }
+                  { starships && <StarShipInfo {...props } starships={starships} total={starshipsData.state.count}/> }
                 </>
               );
             }}>
@@ -81,7 +81,7 @@ const App = () => {
             }}/>
             <Route path="/signin"><SignIn /></Route>
             <Route path="/signup"><SignUp /></Route>
-            <Route exact path="/"><Home /></Route>
+            <Route exact path="/" component={props => <Home {...props} />} />
             <Route component={Error404} />
           </Switch>
         </Row>
