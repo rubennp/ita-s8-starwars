@@ -43,6 +43,7 @@ export const Navigation = styled.div`
 export const DetailsGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
     align-items: center;
     justify-content: space-between;
     margin-top: 0.5em;
@@ -53,7 +54,10 @@ export const DetailsGrid = styled.div`
 `;
 
 export const Details = styled.div`
-    padding: 3em;
+    padding: 1em;
+    filter: drop-shadow(0 0 50px white);
+    backdrop-filter: brightness(.4) blur(1px) opacity(.75);
+    border-radius: 5px;
 `;
 
 export const Detail = styled.div`
@@ -69,7 +73,9 @@ export const Detail = styled.div`
 export const Image = styled.div`
     display: flex;
     justify-content: center;
-    filter: drop-shadow(1px 1px 5px red)
+    filter: drop-shadow(0 0 2px white);
+
+    img { border-radius: 5px;}
 `;
 
 export const Fitxa = styled.dl`

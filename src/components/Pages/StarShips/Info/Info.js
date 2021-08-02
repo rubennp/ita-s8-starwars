@@ -29,23 +29,19 @@ const Info = ({history, starships, total}) => {
                     <div>
                         <button type="button" onClick={() => {
                             setBacks(prev => prev + 1);
-                            console.log(backs);
                             history.push(`/starships/0`)
                         }} >⇤</button>
                         <button type="button" onClick={() => {
                             setBacks(prev => prev + 1);
-                            console.log(backs);
                             history.push(`/starships/${idx > 0 ? parseInt(idx) - 1 : starships.length - 1}`)
                         }} >←</button>
                         <button className="return" type="button" onClick={() => history.go(-(backs))} >△</button>
                         <button type="button" onClick={() => {
                             setBacks(prev => prev + 1);
-                            console.log(backs);
                             history.push(`/starships/${idx < starships.length - 1 ? parseInt(idx) + 1 : 0 }`)
                         }} >→</button>
                         <button type="button" onClick={() => {
                             setBacks(prev => prev + 1);
-                            console.log(backs);
                             history.push(`/starships/${starships.length - 1}`)
                         }} >⇥</button>
                     </div>
