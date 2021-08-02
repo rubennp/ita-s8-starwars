@@ -7,6 +7,7 @@ export const Strong = styled.span`
     border-bottom: 0.25em solid rgba(0, 102, 255, .25);
     filter: drop-shadow(2px 2px 2px rgba(0, 102, 255, .75));
     line-height: .55;
+    padding: 0 10px;
 `;
 export const StyledContainer = styled(Container)`
     display: flex;

@@ -13,11 +13,16 @@ import { AppContainer, Logo } from './App.styled';
 import Home from '../Pages/Home';
 import StarShips from '../Pages/StarShips';
 import StarShipInfo from '../Pages/StarShips/Info';
+import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
 
 // Images
 import StarWarsLogo from '../../assets/logo.svg';
 
 const App = () => {
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
+
   const starshipsData = useGetSwapiData('starships');
   const [starships, setStarships] = useState(null);
 
@@ -27,6 +32,8 @@ const App = () => {
 
   return (
     <AppContainer className="appContainer">
+      <SignIn show={showSignIn} onHide={() => setShowSignIn(false)} />
+      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} />
       <Container fluid className="headerContainer sticky-top">
         <Row className="headerUpperRow">
           <Navbar bg="dark" variant="dark">
@@ -37,8 +44,8 @@ const App = () => {
             </Container>
             <Container className="loginContainer">
               <Nav as="ul">
-                <Nav.Item as="li"><Nav.Link href="/signin">Sign In</Nav.Link></Nav.Item>
-                <Nav.Item as="li"><Nav.Link href="/signup">Sign Up</Nav.Link></Nav.Item>
+                <Nav.Item as="li"><button onClick={() => setShowSignIn(true) }>Sign In</button></Nav.Item>
+                <Nav.Item as="li"><button onClick={() => setShowSignUp(true) }>Sign Up</button></Nav.Item>
               </Nav>
             </Container>
           </Navbar>
@@ -79,8 +86,6 @@ const App = () => {
                 </>
               );
             }}/>
-            <Route path="/signin"><SignIn /></Route>
-            <Route path="/signup"><SignUp /></Route>
             <Route exact path="/" component={props => <Home {...props} />} />
             <Route component={Error404} />
           </Switch>
@@ -90,8 +95,6 @@ const App = () => {
   );
 }
 
-const SignIn = () => <h2>Sign In</h2>
-const SignUp = () => <h2>Sign Up</h2>
 const Error404 = () => <h2>Ups...</h2>
 
 export default App;

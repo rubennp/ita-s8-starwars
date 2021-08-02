@@ -101,7 +101,7 @@ const Info = ({history, starships, total}) => {
                         src={`https://starwars-visualguide.com/assets/img/starships/${starship.swapiRef}.jpg`}
                         onError={e => { 
                             e.target.src = `${imgError}`
-                            e.target.width = "600"
+                            e.target.width = "550"
                         }}
                         alt="nau"
                     />
