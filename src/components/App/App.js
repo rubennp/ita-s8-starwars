@@ -22,18 +22,32 @@ import StarWarsLogo from '../../assets/logo.svg';
 const App = () => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [users, setUsers] = useState([]);
 
   const starshipsData = useGetSwapiData('starships');
   const [starships, setStarships] = useState(null);
 
-  useEffect(() => {
+  useEffect(function init() {
+    const usersOnLocalStorage = localStorage.getItem('starwars-react-users');
+
+    if (!usersOnLocalStorage) localStorage.setItem('starwars-react-users', JSON.stringify([{
+      name: 'Rubèn',
+      surname: 'Nieto',
+      username: 'rubennp',
+      email: 'mail@mail.com',
+      password: '12345678',
+    }]));
+    else setUsers(JSON.parse(usersOnLocalStorage));
+  }, []);
+
+  useEffect(function changeOnStarships() {
     setStarships(starshipsData.state.results);
   }, [starshipsData.state.results]);
 
   return (
     <AppContainer className="appContainer">
-      <SignIn show={showSignIn} onHide={() => setShowSignIn(false)} />
-      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} />
+      <SignIn show={showSignIn} onHide={() => setShowSignIn(false)} users={users}/>
+      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} users={users}/>
       <Container fluid className="headerContainer sticky-top">
         <Row className="headerUpperRow">
           <Navbar bg="dark" variant="dark">

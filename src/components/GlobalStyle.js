@@ -1,17 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-    * {
-        font-family: 'Dosis', sans-serif;
-    }
+    * { font-family: 'Dosis', sans-serif; }
 
-    body {
-        background-color: black !important;
-    }
+    body { background-color: black !important; }
 
-    a.nav-link {
-        text-transform: uppercase;
-    }
+    a.nav-link { text-transform: uppercase; }
 
     .headerMainNav {
         border-top: 1px solid rgba(255, 255, 255, .5);
