@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 export const SignModal = styled(Modal)`
-  backdrop-filter: grayscale(.75) blur(5px);
+  backdrop-filter: grayscale(.8) blur(5px);
   background-color: rgba(255, 255, 255, .25);
 
   .modal-content {
@@ -11,10 +11,32 @@ export const SignModal = styled(Modal)`
     box-shadow: 0 0 5px white;
   }
 
-  .btn-close { filter: invert(100); }
+  .btn-close { 
+    filter: invert(100); 
+    
+    &:hover {
+      filter: invert(100) drop-shadow(0 0 5px white);
+    }
+  }
 
   strong {
     color: #ECD900;
     text-transform: uppercase;
+  }
+`;
+
+export const SWButton = styled(Button)`
+  background-color: #ECD900;
+  color: black;
+  font-weight: bold;
+  border: none;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(236, 217, 0, .9);
+
+  &:not(first-of-type) { margin-left: 1em; }
+
+  &:hover { 
+    background-color: rgba(236, 217, 0, .5);
+    box-shadow: none;
   }
 `;
