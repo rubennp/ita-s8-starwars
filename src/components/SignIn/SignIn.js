@@ -25,11 +25,11 @@ const SignIn = props => {
     setValidPassword(false);
   };
 
-  useEffect(() => {
+  useEffect(function init() {
     initState();
   }, []);
 
-  useEffect(() => {
+  useEffect(function validateDataOnChange() {
     validateEmail();
     validatePassword();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,7 +44,8 @@ const SignIn = props => {
       e.preventDefault();
       e.stopPropagation();
     } else {
-      console.log(`Welcome back, ${user.username}!`);
+      console.log(`Welcome back, ${user.username}`);
+      props.setauth(user);
       setFormValidated(true);
     }
   };
@@ -95,7 +96,7 @@ const SignIn = props => {
   };
 
   return (
-    <SignModal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+    <SignModal show={props.show} onHide={props.onHide} size="md" aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           <strong>Sign in</strong>

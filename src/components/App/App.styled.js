@@ -19,6 +19,7 @@ export const AppContainer = styled.div`
         li {
             display: flex;
             align-content: center;
+            color: white;
         }
         
         button {
@@ -30,6 +31,14 @@ export const AppContainer = styled.div`
             &:hover {
                 transform: scale(1.1, 1.1);
                 color: white;
+
+                img { filter: invert() opacity(1); }
+            }
+
+            img {
+                display: block;
+                filter: invert() opacity(.5);
+                margin-left: .5em;
             }
         }
     }

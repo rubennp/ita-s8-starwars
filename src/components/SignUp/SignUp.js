@@ -74,7 +74,7 @@ const SignUp = props => {
       e.stopPropagation();
     } else {
       const newUser = () => {
-        props.setUsers(
+        props.setusers(
         [...props.users,
           {
             name: name,
@@ -186,7 +186,7 @@ const SignUp = props => {
   };
 
   return (
-    <SignModal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
+    <SignModal show={props.show} onHide={props.onHide} size="md" aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           <strong>Sign in</strong>

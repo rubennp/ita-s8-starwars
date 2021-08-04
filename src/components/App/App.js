@@ -18,31 +18,43 @@ import SignUp from '../SignUp/SignUp';
 
 // Images
 import StarWarsLogo from '../../assets/logo.svg';
+import SignOut from '../../assets/box-arrow-right.svg';
 
 const App = () => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [users, setUsers] = useState([]);
+  const [authUser, setAuthUser] = useState(null);
 
   const starshipsData = useGetSwapiData('starships');
   const [starships, setStarships] = useState(null);
 
   useEffect(function init() {
     const usersOnLocalStorage = localStorage.getItem('starwars-react-users');
+    const authUserOnSessionStorage = sessionStorage.getItem('starwars-react-authuser');
 
-    if (!usersOnLocalStorage) localStorage.setItem('starwars-react-users', JSON.stringify([{
-      name: 'Rubèn',
-      surname: 'Nieto',
-      username: 'rubennp',
-      email: 'mail@mail.com',
-      password: 'I5O5l97B',
+    if (usersOnLocalStorage) setUsers(JSON.parse(usersOnLocalStorage));
+    else localStorage.setItem('starwars-react-users', JSON.stringify([{
+      name: 'John',
+      surname: 'Smith',
+      username: 'jsmith',
+      email: 'jsmith@mail.com',
+      password: '1234567A',
     }]));
-    else setUsers(JSON.parse(usersOnLocalStorage));
+
+    if (authUserOnSessionStorage) setAuthUser(JSON.parse(authUserOnSessionStorage));
   }, []);
 
   useEffect(function saveNewUsersOnLocalStorage() {
     localStorage.setItem('starwars-react-users', JSON.stringify(users));
   }, [users]);
+
+  useEffect(function saveOrRemoveAuthUserFromSessionStorage() {
+    if (authUser)
+      sessionStorage.setItem('starwars-react-authuser', JSON.stringify(authUser));
+    else
+      sessionStorage.removeItem('starwars-react-authuser');
+  }, [authUser]);
 
   useEffect(function changeOnStarships() {
     setStarships(starshipsData.state.results);
@@ -50,8 +62,8 @@ const App = () => {
 
   return (
     <AppContainer className="appContainer">
-      <SignIn show={showSignIn} onHide={() => setShowSignIn(false)} users={users}/>
-      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} users={users} setUsers={setUsers}/>
+      <SignIn show={showSignIn} onHide={() => setShowSignIn(false)} users={users} setauth={setAuthUser}/>
+      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} users={users} setusers={setUsers}/>
       <Container fluid className="headerContainer sticky-top">
         <Row className="headerUpperRow">
           <Navbar bg="dark" variant="dark">
@@ -62,8 +74,14 @@ const App = () => {
             </Container>
             <Container className="loginContainer">
               <Nav as="ul">
-                <Nav.Item as="li"><button onClick={() => setShowSignIn(true) }>Sign In</button></Nav.Item>
-                <Nav.Item as="li"><button onClick={() => setShowSignUp(true) }>Sign Up</button></Nav.Item>
+                  <Nav.Item as="li">
+                    {!authUser && <button onClick={() => setShowSignIn(true) }>Sign In</button>}
+                    {authUser && `Welcome back, ${authUser.name}!`}
+                  </Nav.Item>
+                  <Nav.Item as="li">
+                    {!authUser && <button onClick={() => setShowSignUp(true) }>Sign Up</button>}
+                    {authUser && <button onClick={() => setAuthUser(null) }><img src={SignOut} alt="sign out icon" /></button>}
+                  </Nav.Item>
               </Nav>
             </Container>
           </Navbar>
