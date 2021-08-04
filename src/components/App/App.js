@@ -35,10 +35,14 @@ const App = () => {
       surname: 'Nieto',
       username: 'rubennp',
       email: 'mail@mail.com',
-      password: '12345678',
+      password: 'I5O5l97B',
     }]));
     else setUsers(JSON.parse(usersOnLocalStorage));
   }, []);
+
+  useEffect(function saveNewUsersOnLocalStorage() {
+    localStorage.setItem('starwars-react-users', JSON.stringify(users));
+  }, [users]);
 
   useEffect(function changeOnStarships() {
     setStarships(starshipsData.state.results);
@@ -47,7 +51,7 @@ const App = () => {
   return (
     <AppContainer className="appContainer">
       <SignIn show={showSignIn} onHide={() => setShowSignIn(false)} users={users}/>
-      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} users={users}/>
+      <SignUp show={showSignUp} onHide={() => setShowSignUp(false)} users={users} setUsers={setUsers}/>
       <Container fluid className="headerContainer sticky-top">
         <Row className="headerUpperRow">
           <Navbar bg="dark" variant="dark">

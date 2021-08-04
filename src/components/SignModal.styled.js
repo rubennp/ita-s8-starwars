@@ -35,7 +35,7 @@ export const SWButton = styled(Button)`
 
   &:not(first-of-type) { margin-left: 1em; }
 
-  &:hover { 
+  &:hover, &:focus { 
     background-color: rgba(236, 217, 0, .5);
     box-shadow: none;
   }

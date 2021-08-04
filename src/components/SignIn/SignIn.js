@@ -10,19 +10,23 @@ const SignIn = props => {
   const [email, setEmail] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [password, setPassword] = useState("");
-  const [validated, setValidated] = useState(false);
+  const [formValidated, setFormValidated] = useState(false);
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState({
     email: 'Required',
     password: 'Required',
   });
 
-  useEffect(() => {
+  const initState = () => {
     setUser(null);
     setEmail("");
     setPassword("");
     setValidEmail(false);
     setValidPassword(false);
+  };
+
+  useEffect(() => {
+    initState();
   }, []);
 
   useEffect(() => {
@@ -33,10 +37,16 @@ const SignIn = props => {
 
   const handleSubmit = e => {
     if(!(validEmail && validPassword)) {
+      console.log("Ups... there was errors on the signing in process:");
+      console.log(`-------------------------------------------------
+      email says: ${errors.email}
+      password says: ${errors.password}`);
       e.preventDefault();
       e.stopPropagation();
-    } 
-    setValidated(true);
+    } else {
+      console.log(`Welcome back, ${user.username}!`);
+      setFormValidated(true);
+    }
   };
 
   const validateEmail = () => {
@@ -72,11 +82,7 @@ const SignIn = props => {
   };
 
   const handleReset = e => {
-    setUser(null);
-    setEmail("");
-    setPassword("");
-    setValidEmail(false);
-    setValidPassword(false);
+    initState();
 
     const form = e.currentTarget;
     const inputs = form.querySelectorAll('input');
@@ -85,7 +91,7 @@ const SignIn = props => {
       if (i.classList.contains('is-valid')) i.classList.remove('is-valid');
     });
 
-    setValidated(false);
+    setFormValidated(false);
   };
 
   return (
@@ -96,7 +102,7 @@ const SignIn = props => {
         </Modal.Title>
       </Modal.Header>
         <Modal.Body>
-            <Form noValidate validated={validated} onSubmit={handleSubmit} onReset={handleReset} >
+            <Form noValidate validated={formValidated} onSubmit={handleSubmit} onReset={handleReset} >
               <Form.Group className="mb-3" controlId="formSignInEmail">
                 <Form.Label>Email address</Form.Label>
                 <InputGroup hasValidation>
