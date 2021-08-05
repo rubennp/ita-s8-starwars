@@ -10,7 +10,7 @@ import App from './components/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle /> 
+  <GlobalStyle /> 
     <Router>
       <App />
     </Router>

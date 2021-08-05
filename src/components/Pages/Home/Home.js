@@ -1,7 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
-import { StyledContainer, Hero, Strong } from './Home.styled';
+import { StyledContainer, Hero, Strong } from '../Pages.styled';
 
-// import Droids from '../../../assets/droids.jpeg';
 import BB8 from '../../../assets/bb8.jpg';
 
 const Home = ({history}) => (
