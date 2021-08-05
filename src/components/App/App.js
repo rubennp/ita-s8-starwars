@@ -13,6 +13,7 @@ import Home from '../Pages/Home';
 import StarShips from '../Pages/StarShips';
 import StarShipInfo from '../Pages/StarShips/Info';
 import Protected from '../Pages/Protected';
+import Error404 from '../Pages/Error404';
 
 // Modals
 import SignIn from '../SignIn/SignIn';
@@ -135,7 +136,5 @@ const App = () => {
     </>
   );
 }
-
-const Error404 = () => <h2>Ups...</h2>;
 
 export default App;
