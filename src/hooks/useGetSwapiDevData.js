@@ -1,3 +1,7 @@
+/*
+ * Usado para obtener datos de https://swapi.dev
+ */
+
 import { useEffect, useState, useReducer } from 'react';
 import axios from 'axios';
 
@@ -31,7 +35,7 @@ const reducer = (state, action)  => {
     }
 };
 
-export const useGetSwapiData = (from) => {
+export const useGetSwapiDevData = (from) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     const [hasMore, setHasMore] = useState(false);
@@ -52,28 +56,23 @@ export const useGetSwapiData = (from) => {
             setIsLoading(true);
             setError(false);
 
-            let cancel;
             await axios({
                 method: 'GET',
-                url: `https://swapi.dev/api/${from}`,
+                url: `https:/swapi.dev//api/${from}`, 
                 params: { page: pageNumber },
-                cancelToken: new axios.CancelToken(c => cancel = c),
             }).then(res => res.data).then(d => {
-                if (pageNumber === 1) {
+                if (pageNumber === 1)
                     dispatch({type: 'INIT', payload: { initData: d }});
-                } else if (pageNumber > 1) {
+                else if (pageNumber > 1)
                     dispatch({type: 'ADD', payload: { addData: { data: d, pageNumber: pageNumber }}});
-                }
                 setIsLoading(false);
             }).catch(e => {
-                if (axios.isCancel(e)) return;
+                console.log(e);
                 setError(true);
             });
-
-            return () => cancel();
         };
 
-        getData();
+        getData();    // swapi.dev www.swapi.tech
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageNumber]);

@@ -3,7 +3,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 // Hooks
-import { useGetSwapiData } from '../../hooks/useGetSwapiData';
+import { useGetSwapiDevData } from '../../hooks/useGetSwapiDevData';
 
 // Styled Components
 import * as Styled from './App.styled';
@@ -32,7 +32,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [authUser, setAuthUser] = useState(null);
 
-  const starshipsData = useGetSwapiData('starships');
+  const starshipsData = useGetSwapiDevData('starships');
   const [starships, setStarships] = useState(null);
   
   useEffect(function init() {
@@ -52,7 +52,7 @@ const App = () => {
   }, []);
 
   useEffect(function saveNewUsersOnLocalStorage() {
-    localStorage.setItem('starwars-react-users', JSON.stringify(users));
+    users.length && localStorage.setItem('starwars-react-users', JSON.stringify(users));
   }, [users]);
 
   useEffect(function saveOrRemoveAuthUserFromSessionStorage() {

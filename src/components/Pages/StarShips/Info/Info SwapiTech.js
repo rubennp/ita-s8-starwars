@@ -1,25 +1,48 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import { Fitxa, Header, DetailsGrid, Details, Detail, Image, Navigation } from './Info.styled.js';
 
-import ShowPilots from './ShowPilots';
-
 import imgError from '../../../../assets/found-image-not-was.jpg';
+
+// if www.swapi.tech:
+const getData = async url => {
+    return await axios({
+        method: 'GET',
+        url: url,
+    }).then(res => res.data.result.properties);
+};
+// end www.swapi.tech
 
 const Info = ({history, starships, total}) => {
     const { idx } = useParams();
     const [backs, setBacks] = useState(1);
     
-    useEffect(() => {
+    useEffect(() => { 
         setBacks(1); 
     }, []);
 
-    const [starship, setStarship] = useState({...starships[idx]});
+    // swapi.dev:
+    // const [starship, setStarship] = useState({...starships[idx]});
 
-    useEffect(() => { 
-        setStarship({...starships[idx]});
+    // useEffect(() => { 
+    //     setStarship({...starships[idx]});
+    // }, [starships, idx]);
+    // end swapi.dev
+
+    // www.swapi.tech:
+    const [infoUrl, setInfoUrl] = useState(starships[idx].url);
+    const [starship, setStarship] = useState({});
+
+    useEffect(() => {
+        getData(infoUrl).then(props => setStarship({...props}));
+    }, [infoUrl]);
+
+    useEffect(() => {
+        setInfoUrl(starships[idx.url]);
     }, [starships, idx]);
+    // end www.swapi.tech
 
     return (
         <Fitxa>
@@ -38,7 +61,7 @@ const Info = ({history, starships, total}) => {
                             setBacks(prev => prev + 1);
                             history.push(`/starships/${idx > 0 ? parseInt(idx) - 1 : starships.length - 1}`)
                         }} >←</button>
-                        <button type="button" onClick={() => history.go(-(backs))} >△</button>
+                        <button className="return" type="button" onClick={() => history.go(-(backs))} >△</button>
                         <button type="button" onClick={() => {
                             setBacks(prev => prev + 1);
                             history.push(`/starships/${idx < starships.length - 1 ? parseInt(idx) + 1 : 0 }`)
@@ -49,6 +72,7 @@ const Info = ({history, starships, total}) => {
                         }} >⇥</button>
                     </div>
                     <p>{`loaded ${starships.length} of ${total}`}</p>
+
                 </Navigation>
             </Header>
             <DetailsGrid>
@@ -109,7 +133,6 @@ const Info = ({history, starships, total}) => {
                     />
                 </Image>
             </DetailsGrid>
-            { starship.pilots.length > 0 && <ShowPilots pilots={starship.pilots} /> }
         </Fitxa>
     );
 };
