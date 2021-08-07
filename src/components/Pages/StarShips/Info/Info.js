@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Fitxa, Header, DetailsGrid, Details, Detail, Image, Navigation } from './Info.styled.js';
 
 import ShowPilots from './ShowPilots';
+import ShowFilms from './ShowFilms';
 
 import imgError from '../../../../assets/found-image-not-was.jpg';
 
@@ -110,6 +111,7 @@ const Info = ({history, starships, total}) => {
                 </Image>
             </DetailsGrid>
             { starship.pilots.length > 0 && <ShowPilots pilots={starship.pilots} /> }
+            { starship.films.length > 0 && <ShowFilms films={starship.films} /> }
         </Fitxa>
     );
 };
