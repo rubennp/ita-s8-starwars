@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { SignModal, SWButton } from '../SignModal.styled';
 import { Modal, Form, InputGroup } from 'react-bootstrap';
 
-import AsteriskIcon from '../../assets/asterisk.svg';
-import AtIcon from '../../assets/at.svg';
-import UsernameIcon from '../../assets/person-circle.svg';
-import RepeatPasswordIcon from '../../assets/arrow-repeat.svg';
+import AsteriskIcon from '../img/asterisk.svg';
+import AtIcon from '../img/at.svg';
+import UsernameIcon from '../img/person-circle.svg';
+import RepeatPasswordIcon from '../img/arrow-repeat.svg';
 
 const SignUp = props => {
   const [name, setName] = useState("");

@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
-const Item = ({starship})  => {
+const Item = ({item, what})  => {
     return (
         <Li>
-            <h2>{starship.name}</h2>
-            <h3>{starship.model}</h3>
+            <h2>{item.name}</h2>
         </Li>
     );
 };
 
 const Li = styled.li`
-    padding: 10px;
+    padding: 2em;
     background-color: #212529;
     color: rgba(255, 255, 255, .5);
 

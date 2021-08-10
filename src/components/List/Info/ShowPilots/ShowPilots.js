@@ -1,6 +1,8 @@
 import { useEffect, useReducer } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+
+import { PilotsFilmsAndStarships as Pilots } from '../Info.styled';
+
 
 const getSwapiRef = url => url.replaceAll(/[^\d]/g, '');
 
@@ -50,8 +52,10 @@ const ShowPilots = ({pilots}) => {
                 { pilotsInfo && pilotsInfo.map((pilot, idx) => {
                     return (
                         <li key={`${idx}${pilot.swapiRef}`}>
-                            <img key={idx} src={`https://starwars-visualguide.com/assets/img/characters/${pilot.swapiRef}.jpg`} alt="pilot" />
-                            <p>{pilot.name}</p>
+                            <div>
+                                <img key={idx} src={`https://starwars-visualguide.com/assets/img/characters/${pilot.swapiRef}.jpg`} alt="pilot" />
+                                <p>{pilot.name}</p>
+                            </div>
                         </li>
                     );
                 })}
@@ -59,54 +63,5 @@ const ShowPilots = ({pilots}) => {
         </Pilots>
     );
 };
-
-const Pilots = styled.div`
-    margin-top: 1em;
-
-    h2 {
-        color: rgba(255, 255, 255, .75);
-    }
-
-    ul {
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-
-        li {
-            list-style-type: none;
-            width: 25%;
-
-            &:hover img {
-                cursor: pointer;
-                filter: grayscale(75%);
-            }
-
-            &:hover p { opacity: 1; }
-
-            img { 
-                width: 100%;
-                padding: 10px;
-                transition: filter .5s;
-            }
-
-            p { 
-                opacity: 0;
-                position: absolute;
-                width: 25%;
-                bottom: 0;
-                text-align: center;
-                padding: 1em 0;
-                margin: 0;
-                color: white;
-                font-size: 1.5em;
-                text-transform: uppercase;
-                background-color: rgba(0, 0, 0, .5);
-                transition: opacity .5s;
-            }
-        }
-    }
-`;
-
 
 export default ShowPilots;

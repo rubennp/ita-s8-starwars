@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 // Styled Components
 import { StyledContainer, Hero, Strong } from '../Pages.styled';
 
-import Droids from '../../../assets/droids.jpeg';
+import Droids from './img/droids.jpeg';
 
 const Protected = ({ signin, signup }) => (
   <StyledContainer>

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { SignModal, SWButton } from '../SignModal.styled';
 import { Modal, Form, InputGroup } from 'react-bootstrap';
 
-import AsteriskIcon from '../../assets/asterisk.svg';
-import AtIcon from '../../assets/at.svg';
+import AsteriskIcon from '../img/asterisk.svg';
+import AtIcon from '../img/at.svg';
 
 const SignIn = props => {
   const [validEmail, setValidEmail] = useState(false);

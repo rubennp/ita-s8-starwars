@@ -20,14 +20,14 @@ const reducer = (state, action)  => {
             return ({
                 count: initData.count,
                 next: initData.next,
-                results: [...new Set([...initData.results.map(el => { return ({...el, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); })])],
+                results: [...new Set([...initData.results.map((el, idx) => { return ({...el, idx: idx, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); })])],
             });
         case 'ADD':
             const { addData } = action.payload;
             return ({
                 count: addData.data.count,
                 next: addData.data.next,
-                results: [...new Set([...state.results, ...addData.data.results.map(el => { return ({...el, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); })])],
+                results: [...new Set([...state.results, ...addData.data.results.map((el, idx) => { return ({...el, idx: idx, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); })])],
                 pageNumber: addData.pageNumber,
             });
         default:
@@ -72,7 +72,7 @@ export const useGetSwapiDevData = (from) => {
             });
         };
 
-        getData();    // swapi.dev www.swapi.tech
+        getData(); 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageNumber]);

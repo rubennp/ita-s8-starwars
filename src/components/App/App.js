@@ -10,18 +10,20 @@ import * as Styled from './App.styled';
 
 // Pages
 import Home from '../Pages/Home';
-import StarShips from '../Pages/StarShips';
-import StarShipInfo from '../Pages/StarShips/Info';
 import Protected from '../Pages/Protected';
 import Error404 from '../Pages/Error404';
 
+import List from '../List';
+import StarShipInfo from '../List/Info/Starship';
+import PeopleInfo from '../List/Info/People';
+
 // Modals
-import SignIn from '../SignIn/SignIn';
-import SignUp from '../SignUp/SignUp';
+import SignIn from '../Modals/SignIn';
+import SignUp from '../Modals/SignUp';
 
 // Images
-import StarWarsLogo from '../../assets/logo.svg';
-import SignOut from '../../assets/box-arrow-right.svg';
+import StarWarsLogo from './img/logo.svg';
+import SignOut from './img/box-arrow-right.svg';
 
 /* 
  * App()
@@ -33,7 +35,10 @@ const App = () => {
   const [authUser, setAuthUser] = useState(null);
 
   const starshipsData = useGetSwapiDevData('starships');
+  const peopleData = useGetSwapiDevData('people');
+
   const [starships, setStarships] = useState(null);
+  const [people, setPeople] = useState(null);
   
   useEffect(function init() {
     const usersOnLocalStorage = localStorage.getItem('starwars-react-users');
@@ -65,6 +70,10 @@ const App = () => {
   useEffect(function changeOnStarships() {
     setStarships(starshipsData.state.results);
   }, [starshipsData.state.results]);
+
+  useEffect(function changeOnPleople() {
+    setPeople(peopleData.state.results);
+  }, [peopleData.state.results]);
 
   return (
     <>
@@ -98,6 +107,7 @@ const App = () => {
               <Nav as="ul">
                 <Nav.Item as="li"><NavLink exact to ="/" className="nav-link">Home</NavLink></Nav.Item>
                 <Nav.Item as="li"><NavLink to="/starships" className="nav-link">StarShips</NavLink></Nav.Item>
+                <Nav.Item as="li"><NavLink to="/people" className="nav-link">People</NavLink></Nav.Item>
               </Nav>
             </Styled.MenuContainer>
           </Navbar>
@@ -106,6 +116,27 @@ const App = () => {
       <Container>
         <Row>
           <Switch>
+            <Route path="/people/:idx" render={props => {
+              return authUser ? (
+                <>
+                  { peopleData.isLoading && 
+                    <Spinner animation="grow" variant="light">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner> }
+                  { people && <PeopleInfo {...props } people={people} total={peopleData.state.count} /> }
+                </>
+              ) : <Protected signin={setShowSignIn} signup={setShowSignUp}/>;
+            }} />
+            <Route path="/people" render={props => {
+              return authUser ? (
+                <>
+                  { people && <List {...props} list={people} what="people" data={{isLoading: peopleData.isLoading, hasMore: peopleData.hasMore, setPage: peopleData.setPageNumber}} /> }
+                  { peopleData.isLoading && <Spinner animation="border" variant="light"> 
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner> }
+                </>
+              ) : <Protected singin={setShowSignIn} signup={setShowSignUp} />;
+            }} />
             <Route path="/starships/:idx" render={props => {
               return authUser ? (
                 <>
@@ -113,7 +144,7 @@ const App = () => {
                     <Spinner animation="grow" variant="light">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner> }
-                  { starships && <StarShipInfo {...props } starships={starships} total={starshipsData.state.count}/> }
+                  { starships && <StarShipInfo {...props } starships={starships} total={starshipsData.state.count} /> }
                 </>
               ) : <Protected signin={setShowSignIn} signup={setShowSignUp}/>;
             }}>
@@ -121,7 +152,7 @@ const App = () => {
             <Route path="/starships" render={props => {
               return authUser ? (
                 <>
-                  { starships && <StarShips {...props} starships={starships} data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} /> }
+                  { starships && <List {...props} list={starships} what="starships" data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} /> }
                   { starshipsData.isLoading && <Spinner animation="border" variant="light"> 
                     <span className="visually-hidden">Loading...</span>
                   </Spinner> }

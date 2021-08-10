@@ -1,7 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 import { StyledContainer, Hero, Strong } from '../Pages.styled';
 
-import BB8 from '../../../assets/bb8.jpg';
+import BB8 from './img/bb8.jpg';
 
 const Home = ({history}) => (
     <StyledContainer>

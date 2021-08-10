@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // components
 import Item from './Item';
 
-const StarShips = ({history, starships, data: {isLoading, hasMore, setPage} }) => {
+const List = ({history, list, what, data: {isLoading, hasMore, setPage} }) => {
     const observer = useRef();
     const lastEl = useCallback(node => {
         if (isLoading) return;
@@ -20,24 +20,24 @@ const StarShips = ({history, starships, data: {isLoading, hasMore, setPage} }) =
     }, [isLoading, hasMore]);
 
     return (
-        <Ul id="starships-list">
-            {starships.map((starship, idx) => {
-                const isLastEl = starships.length === idx + 1;
+        <Items>
+            {list.map((item, idx) => {
+                const isLastEl = list.length === idx + 1;
 
                 return (
                     <button type="button" key={idx} ref={isLastEl ? lastEl : null } onClick={() => { 
-                        history.push(`/starships/${idx}`);
+                        history.push(`/${what}/${idx}`);
                     }}>
-                        <Item starship={starship}></Item>
+                        <Item item={item} what={what}></Item>
                     </button>
                 ); 
             }
             )}
-        </Ul>
+        </Items>
     );
 };
 
-const Ul = styled.ul`
+const Items = styled.ul`
     button {
         display: list-item;
         width: 100%;
@@ -50,4 +50,4 @@ const Ul = styled.ul`
     list-style-type: none;
 `;
 
-export default StarShips;
+export default List;

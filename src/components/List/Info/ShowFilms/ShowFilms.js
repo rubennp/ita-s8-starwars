@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+
+import { PilotsFilmsAndStarships as Films } from '../Info.styled';
 
 const getSwapiRef = url => url.replaceAll(/[^\d]/g, '');
 const romanEpisode = 
@@ -56,8 +57,10 @@ const ShowFilms = ({films}) => {
                 }).map((film, idx) => {
                     return (
                         <li key={`${idx}${film.swapiRef}`}>
-                            <img key={idx} src={`https://starwars-visualguide.com/assets/img/films/${film.swapiRef}.jpg`} alt="film" />
-                            <p>Episode {romanEpisode[film.episode]}:<br/>{film.title}</p>
+                            <div>
+                                <img key={idx} src={`https://starwars-visualguide.com/assets/img/films/${film.swapiRef}.jpg`} alt="film" />
+                                <p>Episode {romanEpisode[film.episode]}:<br/><span>{film.title}</span></p>
+                            </div>
                         </li>
                     );
                 })}
@@ -65,56 +68,5 @@ const ShowFilms = ({films}) => {
         </Films>
     );
 };
-
-const Films = styled.div`
-    margin-top: 1em;
-
-    h2 {
-        color: rgba(255, 255, 255, .75);
-    }
-
-    ul {
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-
-        li {
-            list-style-type: none;
-            width: 25%;
-
-            &:hover img {
-                cursor: pointer;
-                filter: grayscale(75%);
-            }
-
-            &:hover p { opacity: 1; }
-
-            img { 
-                width: 100%;
-                padding: 10px;
-                transition: filter .5s;
-            }
-
-            p { 
-                opacity: 0;
-                position: absolute;
-                width: 25%;
-                bottom: 0;
-                text-align: center;
-                padding: 1em 0;
-                margin: 0;
-                color: white;
-                font-size: 1.5em;
-                text-transform: uppercase;
-                background-color: rgba(0, 0, 0, .5);
-                transition: opacity .5s;
-
-                & span { display: inline-block; }
-            }
-        }
-    }
-`;
-
 
 export default ShowFilms;

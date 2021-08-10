@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container, Row } from 'react-bootstrap';
 
-import Stars from '../../assets/stars.jpeg';
+import Stars from './img/stars.jpeg';
 
 export const HeaderContainer = styled(Container)`
     background: url(${Stars});
@@ -32,7 +32,6 @@ export const HeaderMainNav = styled(Row)`
         }
     }
 `;
-
 
 export const LogoContainer = styled(Container)`
     justify-content: flex-start !important;

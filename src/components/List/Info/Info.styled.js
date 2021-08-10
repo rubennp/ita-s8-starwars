@@ -1,6 +1,59 @@
 import styled from 'styled-components';
 
-import stars from '../../../../assets/stars.jpeg';
+import stars from '../../App/img/stars.jpeg';
+
+export const PilotsFilmsAndStarships = styled.div`
+    margin-top: 1em;
+
+    h2 {
+        color: rgba(255, 255, 255, .75);
+    }
+
+    ul {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        li {
+            list-style-type: none;
+            width: 25%;
+
+            &:hover img {
+                filter: grayscale(75%);
+            }
+
+            &:hover p { opacity: 1; }
+
+            img { 
+                width: 100%;
+                padding: 10px;
+                transition: filter .5s;
+            }
+
+            div {
+                position: relative;
+            }
+
+            p { 
+                opacity: 0;
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                text-align: center;
+                padding: 1em 0;
+                margin: 0;
+                color: white;
+                font-size: 1.5em;
+                text-transform: uppercase;
+                background-color: rgba(0, 0, 0, .5);
+                transition: opacity .5s;
+
+                span { font-size: 0.6em; }
+            }
+        }
+    }
+`;
 
 export const Header = styled.dt`
     display: flex;

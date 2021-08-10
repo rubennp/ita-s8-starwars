@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Bg from '../../../assets/stormtroppers.jpg';
+import Bg from './img/stormtroppers.jpg';
 
 const Error404 = () => {
     return (
