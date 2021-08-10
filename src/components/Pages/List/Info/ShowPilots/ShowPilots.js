@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+// import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { PilotsFilmsAndStarships as Pilots } from '../Info.styled';
@@ -22,6 +23,7 @@ const statePilotsInfo = (pilots, { type, payload: { pilot, total } }) => {
 };
 
 const ShowPilots = ({pilots}) => {
+    // const history = useHistory();
     const [pilotsInfo, dispatchPilotsInfo] = useReducer(statePilotsInfo, initPilotsInfo);
 
     useEffect(function getPilotsInfo() {
@@ -51,7 +53,7 @@ const ShowPilots = ({pilots}) => {
             <ul>
                 { pilotsInfo && pilotsInfo.map((pilot, idx) => {
                     return (
-                        <li key={`${idx}${pilot.swapiRef}`}>
+                        <li key={`${idx}${pilot.swapiRef}`}> {/*onClick={() => { history.push(`/people/${pilot.swapiRef}`); }}*/}
                             <div>
                                 <img key={idx} src={`https://starwars-visualguide.com/assets/img/characters/${pilot.swapiRef}.jpg`} alt="pilot" />
                                 <p>{pilot.name}</p>

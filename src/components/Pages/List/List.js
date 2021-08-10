@@ -1,10 +1,12 @@
 import { useRef, useCallback } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 // components
 import Item from './Item';
 
-const List = ({history, list, what, data: {isLoading, hasMore, setPage} }) => {
+const List = ({list, what, data: {isLoading, hasMore, setPage} }) => {
+    const history = useHistory();
     const observer = useRef();
     const lastEl = useCallback(node => {
         if (isLoading) return;
@@ -25,7 +27,8 @@ const List = ({history, list, what, data: {isLoading, hasMore, setPage} }) => {
                 const isLastEl = list.length === idx + 1;
 
                 return (
-                    <button type="button" key={idx} ref={isLastEl ? lastEl : null } onClick={() => { 
+                    <button type="button" key={idx} ref={isLastEl ? lastEl : null } onClick={() => {
+                        // history.push(`/${what}/${item.swapiRef}`);
                         history.push(`/${what}/${idx}`);
                     }}>
                         <Item item={item} what={what}></Item>

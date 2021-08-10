@@ -1,5 +1,5 @@
 import { useEffect, useState, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { Fitxa, Header, DetailsGrid, Details, Detail, Image } from '../Info.styled';
@@ -40,7 +40,7 @@ const stateCharacter = (character, {type, payload }) => {
     }
 };
 
-const People = ({history, people, total, from }) => {
+const People = ({people, total }) => {
 
     /* 
     || TODO: !!
@@ -49,6 +49,9 @@ const People = ({history, people, total, from }) => {
     */
 
     const {idx} = useParams();
+    // const {ref} = useParams();
+
+    const history = useHistory();
     const [backs, setBacks] = useState(1);
     const [character, dispatchCharacter] = useReducer(stateCharacter, initCharacter);
 
@@ -57,8 +60,8 @@ const People = ({history, people, total, from }) => {
     }, []);
 
     useEffect(function getCharacterInfo() {
-        dispatchCharacter({type: 'INIT', payload: ""});
         const ch = people[idx];
+        // const ch = people.filter(el => el.swapiRef === ref);
 
         const getSpecie = async () => {
             await axios.get(ch.species[0]).then(res => res.data).then(data => {
@@ -78,26 +81,33 @@ const People = ({history, people, total, from }) => {
             });
         };
         
-        if (ch.species[0]) {
-            getSpecie();
-            getLanguage();
+        if (!ch) 
+            history.push('/people');
+        else {
+            if (ch.species[0]) {
+                getSpecie();
+                getLanguage();
+            }
+    
+            if (ch.homeworld) getPlanet(ch);
+            
+            dispatchCharacter({type: 'INIT', payload: ""});
+
+            dispatchCharacter({type: 'CHANGE', payload: {
+                name:ch.name,
+                swapiRef: getSwapiRef(ch.url),
+                height: ch.height,
+                mass: ch.mass,
+                hair_color: ch.hair_color,
+                skin_color: ch.skin_color,
+                eye_color: ch.eye_color,
+                birth_year: ch.birth_year,
+                gender: ch.gender,
+                films: ch.films,
+                starships: ch.starships,
+            }});
         }
-
-        if (ch.homeworld) getPlanet(ch);
-
-        dispatchCharacter({type: 'CHANGE', payload: {
-            name:ch.name,
-            swapiRef: getSwapiRef(ch.url),
-            height: ch.height,
-            mass: ch.mass,
-            hair_color: ch.hair_color,
-            skin_color: ch.skin_color,
-            eye_color: ch.eye_color,
-            birth_year: ch.birth_year,
-            gender: ch.gender,
-            films: ch.films,
-            starships: ch.starships,
-        }});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [people, idx]);
 
     return (

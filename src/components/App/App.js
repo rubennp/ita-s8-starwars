@@ -13,9 +13,9 @@ import Home from '../Pages/Home';
 import Protected from '../Pages/Protected';
 import Error404 from '../Pages/Error404';
 
-import List from '../List';
-import StarShipInfo from '../List/Info/Starship';
-import PeopleInfo from '../List/Info/People';
+import List from '../Pages/List';
+import StarShipInfo from '../Pages/List/Info/Starship';
+import PeopleInfo from '../Pages/List/Info/People';
 
 // Modals
 import SignIn from '../Modals/SignIn';
@@ -116,56 +116,58 @@ const App = () => {
       <Container>
         <Row>
           <Switch>
-            <Route path="/people/:idx" render={props => {
+            {/* <Route path="/people/:ref" render={() => { */}
+            <Route path="/people/:idx" render={() => {
               return authUser ? (
                 <>
                   { peopleData.isLoading && 
                     <Spinner animation="grow" variant="light">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner> }
-                  { people && <PeopleInfo {...props } people={people} total={peopleData.state.count} /> }
+                  { people && <PeopleInfo people={people} total={peopleData.state.count} /> }
                 </>
               ) : <Protected signin={setShowSignIn} signup={setShowSignUp}/>;
             }} />
-            <Route path="/people" render={props => {
+            <Route path="/people" render={() => {
               return authUser ? (
                 <>
-                  { people && <List {...props} list={people} what="people" data={{isLoading: peopleData.isLoading, hasMore: peopleData.hasMore, setPage: peopleData.setPageNumber}} /> }
+                  { people && <List list={people} what="people" data={{isLoading: peopleData.isLoading, hasMore: peopleData.hasMore, setPage: peopleData.setPageNumber}} /> }
                   { peopleData.isLoading && <Spinner animation="border" variant="light"> 
                     <span className="visually-hidden">Loading...</span>
                   </Spinner> }
                 </>
-              ) : <Protected singin={setShowSignIn} signup={setShowSignUp} />;
+              ) : <Protected signin={setShowSignIn} signup={setShowSignUp} />;
             }} />
-            <Route path="/starships/:idx" render={props => {
+            {/* <Route path="/starships/:ref" render={() => { */}
+            <Route path="/starships/:idx" render={() => {
               return authUser ? (
                 <>
                   { starshipsData.isLoading && 
                     <Spinner animation="grow" variant="light">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner> }
-                  { starships && <StarShipInfo {...props } starships={starships} total={starshipsData.state.count} /> }
+                  { starships && <StarShipInfo starships={starships} total={starshipsData.state.count} /> }
                 </>
               ) : <Protected signin={setShowSignIn} signup={setShowSignUp}/>;
             }}>
             </Route>
-            <Route path="/starships" render={props => {
+            <Route path="/starships" render={() => {
               return authUser ? (
                 <>
-                  { starships && <List {...props} list={starships} what="starships" data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} /> }
+                  { starships && <List list={starships} what="starships" data={{isLoading: starshipsData.isLoading, hasMore: starshipsData.hasMore, setPage: starshipsData.setPageNumber}} /> }
                   { starshipsData.isLoading && <Spinner animation="border" variant="light"> 
                     <span className="visually-hidden">Loading...</span>
                   </Spinner> }
                 </>
               ) : <Protected signin={setShowSignIn} signup={setShowSignUp} />;
             }}/>
-            <Route exact path="/" component={props => <Home {...props} />} />
+            <Route exact path="/" component={Home} />
             <Route component={Error404} />
           </Switch>
         </Row>
       </Container>
     </>
   );
-}
+};
 
 export default App;

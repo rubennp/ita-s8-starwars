@@ -189,7 +189,7 @@ const SignUp = props => {
     <SignModal show={props.show} onHide={props.onHide} size="md" aria-labelledby="contained-modal-title-vcenter" backdrop="static" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <strong>Sign in</strong>
+          <strong>Sign up</strong>
         </Modal.Title>
       </Modal.Header>
         <Modal.Body>

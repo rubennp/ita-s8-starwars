@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import stars from '../../App/img/stars.jpeg';
+import stars from '../../../App/img/stars.jpeg';
 
 export const PilotsFilmsAndStarships = styled.div`
     margin-top: 1em;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { Fitxa, Header, DetailsGrid, Details, Detail, Image } from '../Info.styled';
 
@@ -9,8 +9,12 @@ import ShowFilms from '../ShowFilms';
 
 import imgError from '../img/found-image-not-was.jpg';
 
-const Starship = ({history, starships, total }) => {
-    const { idx } = useParams();
+const Starship = ({starships, total }) => {
+    const history = useHistory();
+    const {idx} = useParams();
+    // const {ref} = useParams();
+    // const starshipReferenced = starships.filter(el => el.swapiRef === ref);
+
     const [backs, setBacks] = useState(1);
     
     useEffect(() => {
@@ -18,9 +22,17 @@ const Starship = ({history, starships, total }) => {
     }, []);
 
     const [starship, setStarship] = useState({...starships[idx]});
+    // const [starship, setStarship] = useState(null);
 
-    useEffect(() => { 
-        setStarship({...starships[idx]});
+    // useEffect(function getStarshipInfo(){
+    //     if (starshipReferenced[0]) setStarship({...starshipReferenced[0]});
+    //     else history.push('/starships');
+    // }, [starships, idx]);
+
+    useEffect(function getStarshipInfo() {
+        if (!starship) history.push('/starships');
+        else setStarship({...starships[idx]});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [starships, idx]);
 
     return (
@@ -97,8 +109,8 @@ const Starship = ({history, starships, total }) => {
                     />
                 </Image>
             </DetailsGrid>
-            { starship.pilots.length > 0 && <ShowPilots pilots={starship.pilots} /> }
-            { starship.films.length > 0 && <ShowFilms films={starship.films} /> }
+            { (starship.pilots && starship.pilots.length > 0) && <ShowPilots pilots={starship.pilots} /> }
+            { (starship.films && starship.films.length > 0) && <ShowFilms films={starship.films} /> }
         </Fitxa>
     );
 };

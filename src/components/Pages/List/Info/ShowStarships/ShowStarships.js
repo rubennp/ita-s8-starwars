@@ -53,7 +53,7 @@ const ShowStarships = ({starships}) => {
             <ul>
                 { starshipsInfo && starshipsInfo.map((starship, idx) => {
                     return (
-                        <li key={`${idx}${starship.swapiRef}`}>
+                        <li key={`${idx}${starship.swapiRef}`}> {/*onClick={() => { history.push(`/starships/${starship.swapiRef}`); }}*/}
                             <div>
                                 <img key={idx} src={`https://starwars-visualguide.com/assets/img/starships/${starship.swapiRef}.jpg`} 
                                      onError={e => { 
