@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { PilotsFilmsAndStarships as Starships } from '../Info.styled';
@@ -23,6 +24,7 @@ const stateStarshipsInfo = (starships, { type, payload: { starship, total } }) =
 };
 
 const ShowStarships = ({starships}) => {
+    const history = useHistory();
     const [starshipsInfo, dispatchStarshipsInfo] = useReducer(stateStarshipsInfo, initStarshipsInfo);
 
     useEffect(function getStarshipsInfo() {
@@ -53,8 +55,10 @@ const ShowStarships = ({starships}) => {
             <ul>
                 { starshipsInfo && starshipsInfo.map((starship, idx) => {
                     return (
-                        <li key={`${idx}${starship.swapiRef}`}> {/*onClick={() => { history.push(`/starships/${starship.swapiRef}`); }}*/}
-                            <div>
+                        <li key={`${idx}${starship.swapiRef}`} onClick={() => { 
+                            history.push(`/starships/${starship.swapiRef}`); 
+                        }}> 
+                            <div className="starship">
                                 <img key={idx} src={`https://starwars-visualguide.com/assets/img/starships/${starship.swapiRef}.jpg`} 
                                      onError={e => { 
                                         e.target.src = `${imgError}`

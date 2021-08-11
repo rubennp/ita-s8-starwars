@@ -11,9 +11,8 @@ import imgError from '../img/found-image-not-was.jpg';
 
 const Starship = ({starships, total }) => {
     const history = useHistory();
-    const {idx} = useParams();
-    // const {ref} = useParams();
-    // const starshipReferenced = starships.filter(el => el.swapiRef === ref);
+    const {ref} = useParams();
+    const starshipReferenced = starships.filter(el => el.swapiRef === ref)[0];
 
     const [backs, setBacks] = useState(1);
     
@@ -21,19 +20,13 @@ const Starship = ({starships, total }) => {
         setBacks(1); 
     }, []);
 
-    const [starship, setStarship] = useState({...starships[idx]});
-    // const [starship, setStarship] = useState(null);
+    const [starship, setStarship] = useState({...starshipReferenced});
 
-    // useEffect(function getStarshipInfo(){
-    //     if (starshipReferenced[0]) setStarship({...starshipReferenced[0]});
-    //     else history.push('/starships');
-    // }, [starships, idx]);
-
-    useEffect(function getStarshipInfo() {
-        if (!starship) history.push('/starships');
-        else setStarship({...starships[idx]});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [starships, idx]);
+    useEffect(function getStarshipInfo(){
+        if (starshipReferenced)
+            setStarship({...starshipReferenced});
+        else history.push('/starships');
+    }, [starships, ref]);
 
     return (
         <Fitxa>
@@ -43,7 +36,7 @@ const Starship = ({starships, total }) => {
                     <h3>{starship.model}</h3>
                 </div>
                 <Navigation 
-                    idx={idx} 
+                    idx={starship.idx} 
                     list={starships} 
                     what="starships" 
                     backs={backs} 

@@ -19,10 +19,6 @@ export const PilotsFilmsAndStarships = styled.div`
             list-style-type: none;
             width: 25%;
 
-            &:hover img {
-                filter: grayscale(75%);
-            }
-
             &:hover p { opacity: 1; }
 
             img { 
@@ -33,6 +29,12 @@ export const PilotsFilmsAndStarships = styled.div`
 
             div {
                 position: relative;
+
+                &.starship:hover, &.pilot:hover {
+                    cursor: pointer;
+
+                    & img { filter: grayscale(75%); }
+                }
             }
 
             p { 

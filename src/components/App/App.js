@@ -116,8 +116,7 @@ const App = () => {
       <Container>
         <Row>
           <Switch>
-            {/* <Route path="/people/:ref" render={() => { */}
-            <Route path="/people/:idx" render={() => {
+            <Route path="/people/:ref" render={() => {
               return authUser ? (
                 <>
                   { peopleData.isLoading && 
@@ -138,8 +137,7 @@ const App = () => {
                 </>
               ) : <Protected signin={setShowSignIn} signup={setShowSignUp} />;
             }} />
-            {/* <Route path="/starships/:ref" render={() => { */}
-            <Route path="/starships/:idx" render={() => {
+            <Route path="/starships/:ref" render={() => {
               return authUser ? (
                 <>
                   { starshipsData.isLoading && 

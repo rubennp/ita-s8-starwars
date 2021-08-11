@@ -28,8 +28,7 @@ const List = ({list, what, data: {isLoading, hasMore, setPage} }) => {
 
                 return (
                     <button type="button" key={idx} ref={isLastEl ? lastEl : null } onClick={() => {
-                        // history.push(`/${what}/${item.swapiRef}`);
-                        history.push(`/${what}/${idx}`);
+                        history.push(`/${what}/${item.swapiRef}`);
                     }}>
                         <Item item={item} what={what}></Item>
                     </button>

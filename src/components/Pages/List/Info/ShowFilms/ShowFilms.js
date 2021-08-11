@@ -59,7 +59,7 @@ const ShowFilms = ({films}) => {
                         <li key={`${idx}${film.swapiRef}`}>
                             <div>
                                 <img key={idx} src={`https://starwars-visualguide.com/assets/img/films/${film.swapiRef}.jpg`} alt="film" />
-                                <p>Episode {romanEpisode[film.episode]}:<br/><span>{film.title}</span></p>
+                                <p className="film">Episode {romanEpisode[film.episode]}:<br/><span>{film.title}</span></p>
                             </div>
                         </li>
                     );

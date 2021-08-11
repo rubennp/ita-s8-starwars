@@ -41,15 +41,7 @@ const stateCharacter = (character, {type, payload }) => {
 };
 
 const People = ({people, total }) => {
-
-    /* 
-    || TODO: !!
-    ||
-    || pensar si passo sWapiRef en comptes d'índex...
-    */
-
-    const {idx} = useParams();
-    // const {ref} = useParams();
+    const {ref} = useParams();
 
     const history = useHistory();
     const [backs, setBacks] = useState(1);
@@ -60,8 +52,7 @@ const People = ({people, total }) => {
     }, []);
 
     useEffect(function getCharacterInfo() {
-        const ch = people[idx];
-        // const ch = people.filter(el => el.swapiRef === ref);
+        const ch = people.filter(el => el.swapiRef === ref)[0];
 
         const getSpecie = async () => {
             await axios.get(ch.species[0]).then(res => res.data).then(data => {
@@ -108,7 +99,7 @@ const People = ({people, total }) => {
             }});
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [people, idx]);
+    }, [people, ref]);
 
     return (
         character &&
@@ -119,7 +110,7 @@ const People = ({people, total }) => {
                     {character.specie && <h3>{character.specie}</h3>} 
                 </div>
                 <Navigation 
-                    idx={idx} 
+                    idx={ref} 
                     list={people} 
                     what="people" 
                     backs={backs} 
