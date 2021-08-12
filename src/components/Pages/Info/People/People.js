@@ -87,6 +87,7 @@ const People = ({people, total }) => {
             dispatchCharacter({type: 'CHANGE', payload: {
                 name:ch.name,
                 swapiRef: getSwapiRef(ch.url),
+                idx: ch.idx,
                 height: ch.height,
                 mass: ch.mass,
                 hair_color: ch.hair_color,
@@ -107,10 +108,10 @@ const People = ({people, total }) => {
             <Header>
                 <div>
                     <h2>{character.name}</h2>
-                    {character.specie && <h3>{character.specie}</h3>} 
+                    {character.specie && <h3>{character.specie}</h3>}
                 </div>
                 <Navigation 
-                    idx={ref} 
+                    idx={character.idx} 
                     list={people} 
                     what="people" 
                     backs={backs} 

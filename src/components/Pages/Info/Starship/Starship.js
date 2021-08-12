@@ -26,6 +26,7 @@ const Starship = ({starships, total }) => {
         if (starshipReferenced)
             setStarship({...starshipReferenced});
         else history.push('/starships');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [starships, ref]);
 
     return (

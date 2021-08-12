@@ -71,7 +71,7 @@ const App = () => {
     setStarships(starshipsData.state.results);
   }, [starshipsData.state.results]);
 
-  useEffect(function changeOnPleople() {
+  useEffect(function changeOnPeople() {
     setPeople(peopleData.state.results);
   }, [peopleData.state.results]);
 

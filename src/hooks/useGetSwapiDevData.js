@@ -20,14 +20,18 @@ const reducer = (state, action)  => {
             return ({
                 count: initData.count,
                 next: initData.next,
-                results: [...new Set([...initData.results.map((el, idx) => { return ({...el, idx: idx, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); })])],
+                results: [...new Set([...initData.results.map((el, idx) => { 
+                    return ({...el, idx: idx, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); 
+                })])],
             });
         case 'ADD':
             const { addData } = action.payload;
             return ({
                 count: addData.data.count,
                 next: addData.data.next,
-                results: [...new Set([...state.results, ...addData.data.results.map((el, idx) => { return ({...el, idx: idx, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); })])],
+                results: [...new Set([...state.results, ...addData.data.results.map((el, idx) => { 
+                    return ({...el, idx: ((addData.pageNumber-1)*10)+idx, swapiRef: el.url.replaceAll(/[^\d]/g, '')}); 
+                })])],
                 pageNumber: addData.pageNumber,
             });
         default:
