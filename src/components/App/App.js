@@ -14,8 +14,8 @@ import Protected from '../Pages/Protected';
 import Error404 from '../Pages/Error404';
 
 import List from '../Pages/List';
-import StarShipInfo from '../Pages/List/Info/Starship';
-import PeopleInfo from '../Pages/List/Info/People';
+import StarShipInfo from '../Pages/Info/Starship';
+import PeopleInfo from '../Pages/Info/People';
 
 // Modals
 import SignIn from '../Modals/SignIn';

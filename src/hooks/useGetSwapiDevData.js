@@ -1,7 +1,3 @@
-/*
- * Usado para obtener datos de https://swapi.dev
- */
-
 import { useEffect, useState, useReducer } from 'react';
 import axios from 'axios';
 
